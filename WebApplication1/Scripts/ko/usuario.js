@@ -1,9 +1,15 @@
-﻿var UsuarioModel = new function() {
-    model = this;
-    model.usuarios = ko.observable();
-    model.carregar = function () {
-        $.ajax("http://localhost:55552/Api/Usuarios").done(data => model.usuarios(data));
-    }
-    model.carregar();
+﻿var host = document.location.protocol
+    + "//" + document.location.host
+    + ":" + document.location.port
+    + "/api/Usuarios/"
+var UsuarioModel = new function () {
+    var model = this;
+    model.email = ko.observable();
+    model.senha = ko.observable();
+    model.cofirmarSenha = ko.observable();
+    model.Confirmar = ko.computed(function () {
+        return model.senha() == model.confirmarSenha();
+     }, this);
 }
+
 ko.applyBindings(UsuarioModel);
